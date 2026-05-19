@@ -64,27 +64,6 @@ pi-hotel-pagamento/
 
 ---
 
-## Configuração do .env
-
-Copie o `.env.example` e preencha:
-
-```bash
-cp .env.example .env
-```
-
-Conteúdo do `.env`:
-
-```env
-DATABASE_URL="mysql://20261_projint5_manha:senac@12938@edumysql.acesso.rj.senac.br:3306/20261_projint5_manha_hotel_pagamento"
-JWT_SECRET=hotel_pagamento_secret
-PORT=9534
-AUTH_USER=admin
-AUTH_PASS=admin123
-RABBITMQ_URL=amqp://admin:admin@10.136.38.50:5672
-```
-
----
-
 ## Instalação e execução local
 
 ```bash
