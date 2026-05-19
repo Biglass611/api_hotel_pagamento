@@ -1,0 +1,9 @@
+services:
+  hotel-pagamento:
+    build: .
+    container_name: hotel-pagamento
+    ports:
+      - "9534:9534"
+    env_file:
+      - .env
+    restart: always

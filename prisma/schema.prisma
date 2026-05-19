@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model pagamento {
+  pagamento_id       Int              @id @default(autoincrement())
+  pagamento_tipo     String           @db.VarChar(45)
+  pagamento_status   Int
+  pagamento_data     DateTime
+  pagamento_endereco String           @db.VarChar(45)
+  tipo_pagamento     tipo_pagamento[]
+}
+
+model boleto {
+  boleto_id         Int              @id
+  boleto_numero     String           @db.VarChar(50)
+  boleto_vencimento DateTime
+  boleto_emissao    DateTime
+  boleto_status     Int
+  tipo_pagamento    tipo_pagamento[]
+}
+
+model deposito {
+  deposito_id      Int              @id
+  deposito_banco   String           @db.VarChar(45)
+  deposito_valor   Float
+  deposito_agencia String           @db.VarChar(45)
+  deposito_conta   String           @db.VarChar(45)
+  deposito_status  Int
+  tipo_pagamento   tipo_pagamento[]
+}
+
+model cartao {
+  cartao_id      Int              @id @default(autoincrement())
+  cartao_numero  String           @db.VarChar(45)
+  cartao_validade DateTime
+  cartao_cvv     String           @db.VarChar(3)
+  cartao_banco   String           @db.VarChar(45)
+  cartao_nome    String           @db.VarChar(45)
+  cartao_status  Int
+  tipo_pagamento tipo_pagamento[]
+}
+
+model tipo_pagamento {
+  tipo_pagamento_id     Int      @id
+  pagamento_id          Int
+  boleto_id             Int
+  deposito_id           Int
+  cartao_id             Int
+  tipo_pagamento_status Int
+
+  pagamento pagamento @relation(fields: [pagamento_id], references: [pagamento_id])
+  boleto    boleto    @relation(fields: [boleto_id], references: [boleto_id])
+  deposito  deposito  @relation(fields: [deposito_id], references: [deposito_id])
+  cartao    cartao    @relation(fields: [cartao_id], references: [cartao_id])
+
+  @@index([pagamento_id], name: "fk_tipo_pagamento_pagamentos_idx")
+  @@index([boleto_id], name: "fk_tipo_pagamento_boleto1_idx")
+  @@index([deposito_id], name: "fk_tipo_pagamento_deposito1_idx")
+  @@index([cartao_id], name: "fk_tipo_pagamento_cartao1_idx")
+}
