@@ -1,7 +1,7 @@
 const { getChannel } = require('../config/rabbitmq');
 
 const EXCHANGE = 'pagamento_events';
-const QUEUE = 'pagamento_queue';
+const QUEUE = 'hotel_pagamento_queue';
 
 async function startPagamentoConsumer() {
   try {
