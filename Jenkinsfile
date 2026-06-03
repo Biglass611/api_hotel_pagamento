@@ -1,10 +1,10 @@
 pipeline {
     agent any
     stages {
-        
+
          stage('Fetch Secrets') {
             steps {
-                sh 'npx -y @infisical/cli export --env="dev" --path="/cliente" --token="st.333517ed-deea-40e5-b7e2-e030a662a2b6.988191099ff97d2ecd98b11e35f9f3cd.8a112389d0edbeab052e034c6fdbe73c" > .env'
+                sh 'npx -y @infisical/cli export --env="dev" --path="/pagamento" --token="st.333517ed-deea-40e5-b7e2-e030a662a2b6.988191099ff97d2ecd98b11e35f9f3cd.8a112389d0edbeab052e034c6fdbe73c" > .env'
             }
         }
 
