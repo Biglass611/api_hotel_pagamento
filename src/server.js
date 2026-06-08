@@ -26,6 +26,11 @@ const BASE = '/hotel/pagamento';
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// DEBUG TEMPORÁRIO - remover depois
+app.use((req, res, next) => {
+  console.log(`[DEBUG] Rota recebida: ${req.method} ${req.url}`);
+  next();
+});
 // Swagger
 app.use(`${BASE}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
