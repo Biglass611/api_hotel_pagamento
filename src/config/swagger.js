@@ -10,11 +10,11 @@ const options = {
     },
     servers: [
       {
-        url: `http://academico3.rj.senac.br/hotel/pagamento`,
+        url: `http://academico3.rj.senac.br/20261prj5/hotel/pagamento`,
         description: 'Servidor da faculdade',
       },
       {
-        url: `http://localhost:${process.env.PORT || 9534}/hotel/pagamento`,
+        url: `http://localhost:${process.env.PORT || 9534}/20261prj5/hotel/pagamento`,
         description: 'Servidor local',
       },
     ],
