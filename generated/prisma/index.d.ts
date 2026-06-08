@@ -5309,10 +5309,10 @@ export namespace Prisma {
     deposito_id?: boolean
     cartao_id?: boolean
     tipo_pagamento_status?: boolean
-    pagamento?: boolean | pagamentoDefaultArgs<ExtArgs>
     boleto?: boolean | boletoDefaultArgs<ExtArgs>
-    deposito?: boolean | depositoDefaultArgs<ExtArgs>
     cartao?: boolean | cartaoDefaultArgs<ExtArgs>
+    deposito?: boolean | depositoDefaultArgs<ExtArgs>
+    pagamento?: boolean | pagamentoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tipo_pagamento"]>
 
 
@@ -5326,19 +5326,19 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pagamento?: boolean | pagamentoDefaultArgs<ExtArgs>
     boleto?: boolean | boletoDefaultArgs<ExtArgs>
-    deposito?: boolean | depositoDefaultArgs<ExtArgs>
     cartao?: boolean | cartaoDefaultArgs<ExtArgs>
+    deposito?: boolean | depositoDefaultArgs<ExtArgs>
+    pagamento?: boolean | pagamentoDefaultArgs<ExtArgs>
   }
 
   export type $tipo_pagamentoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "tipo_pagamento"
     objects: {
-      pagamento: Prisma.$pagamentoPayload<ExtArgs>
       boleto: Prisma.$boletoPayload<ExtArgs>
-      deposito: Prisma.$depositoPayload<ExtArgs>
       cartao: Prisma.$cartaoPayload<ExtArgs>
+      deposito: Prisma.$depositoPayload<ExtArgs>
+      pagamento: Prisma.$pagamentoPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       tipo_pagamento_id: number
@@ -5687,10 +5687,10 @@ export namespace Prisma {
    */
   export interface Prisma__tipo_pagamentoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    pagamento<T extends pagamentoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, pagamentoDefaultArgs<ExtArgs>>): Prisma__pagamentoClient<$Result.GetResult<Prisma.$pagamentoPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     boleto<T extends boletoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, boletoDefaultArgs<ExtArgs>>): Prisma__boletoClient<$Result.GetResult<Prisma.$boletoPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    deposito<T extends depositoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, depositoDefaultArgs<ExtArgs>>): Prisma__depositoClient<$Result.GetResult<Prisma.$depositoPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     cartao<T extends cartaoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, cartaoDefaultArgs<ExtArgs>>): Prisma__cartaoClient<$Result.GetResult<Prisma.$cartaoPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    deposito<T extends depositoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, depositoDefaultArgs<ExtArgs>>): Prisma__depositoClient<$Result.GetResult<Prisma.$depositoPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    pagamento<T extends pagamentoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, pagamentoDefaultArgs<ExtArgs>>): Prisma__pagamentoClient<$Result.GetResult<Prisma.$pagamentoPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6409,10 +6409,10 @@ export namespace Prisma {
     deposito_id?: IntFilter<"tipo_pagamento"> | number
     cartao_id?: IntFilter<"tipo_pagamento"> | number
     tipo_pagamento_status?: IntFilter<"tipo_pagamento"> | number
-    pagamento?: XOR<PagamentoRelationFilter, pagamentoWhereInput>
     boleto?: XOR<BoletoRelationFilter, boletoWhereInput>
-    deposito?: XOR<DepositoRelationFilter, depositoWhereInput>
     cartao?: XOR<CartaoRelationFilter, cartaoWhereInput>
+    deposito?: XOR<DepositoRelationFilter, depositoWhereInput>
+    pagamento?: XOR<PagamentoRelationFilter, pagamentoWhereInput>
   }
 
   export type tipo_pagamentoOrderByWithRelationInput = {
@@ -6422,10 +6422,10 @@ export namespace Prisma {
     deposito_id?: SortOrder
     cartao_id?: SortOrder
     tipo_pagamento_status?: SortOrder
-    pagamento?: pagamentoOrderByWithRelationInput
     boleto?: boletoOrderByWithRelationInput
-    deposito?: depositoOrderByWithRelationInput
     cartao?: cartaoOrderByWithRelationInput
+    deposito?: depositoOrderByWithRelationInput
+    pagamento?: pagamentoOrderByWithRelationInput
   }
 
   export type tipo_pagamentoWhereUniqueInput = Prisma.AtLeast<{
@@ -6438,10 +6438,10 @@ export namespace Prisma {
     deposito_id?: IntFilter<"tipo_pagamento"> | number
     cartao_id?: IntFilter<"tipo_pagamento"> | number
     tipo_pagamento_status?: IntFilter<"tipo_pagamento"> | number
-    pagamento?: XOR<PagamentoRelationFilter, pagamentoWhereInput>
     boleto?: XOR<BoletoRelationFilter, boletoWhereInput>
-    deposito?: XOR<DepositoRelationFilter, depositoWhereInput>
     cartao?: XOR<CartaoRelationFilter, cartaoWhereInput>
+    deposito?: XOR<DepositoRelationFilter, depositoWhereInput>
+    pagamento?: XOR<PagamentoRelationFilter, pagamentoWhereInput>
   }, "tipo_pagamento_id">
 
   export type tipo_pagamentoOrderByWithAggregationInput = {
@@ -6528,7 +6528,6 @@ export namespace Prisma {
   }
 
   export type boletoCreateInput = {
-    boleto_id: number
     boleto_numero: string
     boleto_vencimento: Date | string
     boleto_emissao: Date | string
@@ -6537,7 +6536,7 @@ export namespace Prisma {
   }
 
   export type boletoUncheckedCreateInput = {
-    boleto_id: number
+    boleto_id?: number
     boleto_numero: string
     boleto_vencimento: Date | string
     boleto_emissao: Date | string
@@ -6546,7 +6545,6 @@ export namespace Prisma {
   }
 
   export type boletoUpdateInput = {
-    boleto_id?: IntFieldUpdateOperationsInput | number
     boleto_numero?: StringFieldUpdateOperationsInput | string
     boleto_vencimento?: DateTimeFieldUpdateOperationsInput | Date | string
     boleto_emissao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6564,7 +6562,7 @@ export namespace Prisma {
   }
 
   export type boletoCreateManyInput = {
-    boleto_id: number
+    boleto_id?: number
     boleto_numero: string
     boleto_vencimento: Date | string
     boleto_emissao: Date | string
@@ -6572,7 +6570,6 @@ export namespace Prisma {
   }
 
   export type boletoUpdateManyMutationInput = {
-    boleto_id?: IntFieldUpdateOperationsInput | number
     boleto_numero?: StringFieldUpdateOperationsInput | string
     boleto_vencimento?: DateTimeFieldUpdateOperationsInput | Date | string
     boleto_emissao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6588,7 +6585,6 @@ export namespace Prisma {
   }
 
   export type depositoCreateInput = {
-    deposito_id: number
     deposito_banco: string
     deposito_valor: number
     deposito_agencia: string
@@ -6598,7 +6594,7 @@ export namespace Prisma {
   }
 
   export type depositoUncheckedCreateInput = {
-    deposito_id: number
+    deposito_id?: number
     deposito_banco: string
     deposito_valor: number
     deposito_agencia: string
@@ -6608,7 +6604,6 @@ export namespace Prisma {
   }
 
   export type depositoUpdateInput = {
-    deposito_id?: IntFieldUpdateOperationsInput | number
     deposito_banco?: StringFieldUpdateOperationsInput | string
     deposito_valor?: FloatFieldUpdateOperationsInput | number
     deposito_agencia?: StringFieldUpdateOperationsInput | string
@@ -6628,7 +6623,7 @@ export namespace Prisma {
   }
 
   export type depositoCreateManyInput = {
-    deposito_id: number
+    deposito_id?: number
     deposito_banco: string
     deposito_valor: number
     deposito_agencia: string
@@ -6637,7 +6632,6 @@ export namespace Prisma {
   }
 
   export type depositoUpdateManyMutationInput = {
-    deposito_id?: IntFieldUpdateOperationsInput | number
     deposito_banco?: StringFieldUpdateOperationsInput | string
     deposito_valor?: FloatFieldUpdateOperationsInput | number
     deposito_agencia?: StringFieldUpdateOperationsInput | string
@@ -6726,16 +6720,15 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoCreateInput = {
-    tipo_pagamento_id: number
     tipo_pagamento_status: number
-    pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
     boleto: boletoCreateNestedOneWithoutTipo_pagamentoInput
-    deposito: depositoCreateNestedOneWithoutTipo_pagamentoInput
     cartao: cartaoCreateNestedOneWithoutTipo_pagamentoInput
+    deposito: depositoCreateNestedOneWithoutTipo_pagamentoInput
+    pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
   }
 
   export type tipo_pagamentoUncheckedCreateInput = {
-    tipo_pagamento_id: number
+    tipo_pagamento_id?: number
     pagamento_id: number
     boleto_id: number
     deposito_id: number
@@ -6744,12 +6737,11 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoUpdateInput = {
-    tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
-    pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
     boleto?: boletoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
-    deposito?: depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
     cartao?: cartaoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    deposito?: depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
   }
 
   export type tipo_pagamentoUncheckedUpdateInput = {
@@ -6762,7 +6754,7 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoCreateManyInput = {
-    tipo_pagamento_id: number
+    tipo_pagamento_id?: number
     pagamento_id: number
     boleto_id: number
     deposito_id: number
@@ -6771,7 +6763,6 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoUpdateManyMutationInput = {
-    tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
   }
 
@@ -7051,14 +7042,14 @@ export namespace Prisma {
     cartao_status?: SortOrder
   }
 
-  export type PagamentoRelationFilter = {
-    is?: pagamentoWhereInput
-    isNot?: pagamentoWhereInput
-  }
-
   export type BoletoRelationFilter = {
     is?: boletoWhereInput
     isNot?: boletoWhereInput
+  }
+
+  export type CartaoRelationFilter = {
+    is?: cartaoWhereInput
+    isNot?: cartaoWhereInput
   }
 
   export type DepositoRelationFilter = {
@@ -7066,9 +7057,9 @@ export namespace Prisma {
     isNot?: depositoWhereInput
   }
 
-  export type CartaoRelationFilter = {
-    is?: cartaoWhereInput
-    isNot?: cartaoWhereInput
+  export type PagamentoRelationFilter = {
+    is?: pagamentoWhereInput
+    isNot?: pagamentoWhereInput
   }
 
   export type tipo_pagamentoCountOrderByAggregateInput = {
@@ -7308,22 +7299,10 @@ export namespace Prisma {
     deleteMany?: tipo_pagamentoScalarWhereInput | tipo_pagamentoScalarWhereInput[]
   }
 
-  export type pagamentoCreateNestedOneWithoutTipo_pagamentoInput = {
-    create?: XOR<pagamentoCreateWithoutTipo_pagamentoInput, pagamentoUncheckedCreateWithoutTipo_pagamentoInput>
-    connectOrCreate?: pagamentoCreateOrConnectWithoutTipo_pagamentoInput
-    connect?: pagamentoWhereUniqueInput
-  }
-
   export type boletoCreateNestedOneWithoutTipo_pagamentoInput = {
     create?: XOR<boletoCreateWithoutTipo_pagamentoInput, boletoUncheckedCreateWithoutTipo_pagamentoInput>
     connectOrCreate?: boletoCreateOrConnectWithoutTipo_pagamentoInput
     connect?: boletoWhereUniqueInput
-  }
-
-  export type depositoCreateNestedOneWithoutTipo_pagamentoInput = {
-    create?: XOR<depositoCreateWithoutTipo_pagamentoInput, depositoUncheckedCreateWithoutTipo_pagamentoInput>
-    connectOrCreate?: depositoCreateOrConnectWithoutTipo_pagamentoInput
-    connect?: depositoWhereUniqueInput
   }
 
   export type cartaoCreateNestedOneWithoutTipo_pagamentoInput = {
@@ -7332,12 +7311,16 @@ export namespace Prisma {
     connect?: cartaoWhereUniqueInput
   }
 
-  export type pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput = {
+  export type depositoCreateNestedOneWithoutTipo_pagamentoInput = {
+    create?: XOR<depositoCreateWithoutTipo_pagamentoInput, depositoUncheckedCreateWithoutTipo_pagamentoInput>
+    connectOrCreate?: depositoCreateOrConnectWithoutTipo_pagamentoInput
+    connect?: depositoWhereUniqueInput
+  }
+
+  export type pagamentoCreateNestedOneWithoutTipo_pagamentoInput = {
     create?: XOR<pagamentoCreateWithoutTipo_pagamentoInput, pagamentoUncheckedCreateWithoutTipo_pagamentoInput>
     connectOrCreate?: pagamentoCreateOrConnectWithoutTipo_pagamentoInput
-    upsert?: pagamentoUpsertWithoutTipo_pagamentoInput
     connect?: pagamentoWhereUniqueInput
-    update?: XOR<XOR<pagamentoUpdateToOneWithWhereWithoutTipo_pagamentoInput, pagamentoUpdateWithoutTipo_pagamentoInput>, pagamentoUncheckedUpdateWithoutTipo_pagamentoInput>
   }
 
   export type boletoUpdateOneRequiredWithoutTipo_pagamentoNestedInput = {
@@ -7348,6 +7331,14 @@ export namespace Prisma {
     update?: XOR<XOR<boletoUpdateToOneWithWhereWithoutTipo_pagamentoInput, boletoUpdateWithoutTipo_pagamentoInput>, boletoUncheckedUpdateWithoutTipo_pagamentoInput>
   }
 
+  export type cartaoUpdateOneRequiredWithoutTipo_pagamentoNestedInput = {
+    create?: XOR<cartaoCreateWithoutTipo_pagamentoInput, cartaoUncheckedCreateWithoutTipo_pagamentoInput>
+    connectOrCreate?: cartaoCreateOrConnectWithoutTipo_pagamentoInput
+    upsert?: cartaoUpsertWithoutTipo_pagamentoInput
+    connect?: cartaoWhereUniqueInput
+    update?: XOR<XOR<cartaoUpdateToOneWithWhereWithoutTipo_pagamentoInput, cartaoUpdateWithoutTipo_pagamentoInput>, cartaoUncheckedUpdateWithoutTipo_pagamentoInput>
+  }
+
   export type depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput = {
     create?: XOR<depositoCreateWithoutTipo_pagamentoInput, depositoUncheckedCreateWithoutTipo_pagamentoInput>
     connectOrCreate?: depositoCreateOrConnectWithoutTipo_pagamentoInput
@@ -7356,12 +7347,12 @@ export namespace Prisma {
     update?: XOR<XOR<depositoUpdateToOneWithWhereWithoutTipo_pagamentoInput, depositoUpdateWithoutTipo_pagamentoInput>, depositoUncheckedUpdateWithoutTipo_pagamentoInput>
   }
 
-  export type cartaoUpdateOneRequiredWithoutTipo_pagamentoNestedInput = {
-    create?: XOR<cartaoCreateWithoutTipo_pagamentoInput, cartaoUncheckedCreateWithoutTipo_pagamentoInput>
-    connectOrCreate?: cartaoCreateOrConnectWithoutTipo_pagamentoInput
-    upsert?: cartaoUpsertWithoutTipo_pagamentoInput
-    connect?: cartaoWhereUniqueInput
-    update?: XOR<XOR<cartaoUpdateToOneWithWhereWithoutTipo_pagamentoInput, cartaoUpdateWithoutTipo_pagamentoInput>, cartaoUncheckedUpdateWithoutTipo_pagamentoInput>
+  export type pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput = {
+    create?: XOR<pagamentoCreateWithoutTipo_pagamentoInput, pagamentoUncheckedCreateWithoutTipo_pagamentoInput>
+    connectOrCreate?: pagamentoCreateOrConnectWithoutTipo_pagamentoInput
+    upsert?: pagamentoUpsertWithoutTipo_pagamentoInput
+    connect?: pagamentoWhereUniqueInput
+    update?: XOR<XOR<pagamentoUpdateToOneWithWhereWithoutTipo_pagamentoInput, pagamentoUpdateWithoutTipo_pagamentoInput>, pagamentoUncheckedUpdateWithoutTipo_pagamentoInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -7475,15 +7466,14 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoCreateWithoutPagamentoInput = {
-    tipo_pagamento_id: number
     tipo_pagamento_status: number
     boleto: boletoCreateNestedOneWithoutTipo_pagamentoInput
-    deposito: depositoCreateNestedOneWithoutTipo_pagamentoInput
     cartao: cartaoCreateNestedOneWithoutTipo_pagamentoInput
+    deposito: depositoCreateNestedOneWithoutTipo_pagamentoInput
   }
 
   export type tipo_pagamentoUncheckedCreateWithoutPagamentoInput = {
-    tipo_pagamento_id: number
+    tipo_pagamento_id?: number
     boleto_id: number
     deposito_id: number
     cartao_id: number
@@ -7529,15 +7519,14 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoCreateWithoutBoletoInput = {
-    tipo_pagamento_id: number
     tipo_pagamento_status: number
-    pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
-    deposito: depositoCreateNestedOneWithoutTipo_pagamentoInput
     cartao: cartaoCreateNestedOneWithoutTipo_pagamentoInput
+    deposito: depositoCreateNestedOneWithoutTipo_pagamentoInput
+    pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
   }
 
   export type tipo_pagamentoUncheckedCreateWithoutBoletoInput = {
-    tipo_pagamento_id: number
+    tipo_pagamento_id?: number
     pagamento_id: number
     deposito_id: number
     cartao_id: number
@@ -7571,15 +7560,14 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoCreateWithoutDepositoInput = {
-    tipo_pagamento_id: number
     tipo_pagamento_status: number
-    pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
     boleto: boletoCreateNestedOneWithoutTipo_pagamentoInput
     cartao: cartaoCreateNestedOneWithoutTipo_pagamentoInput
+    pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
   }
 
   export type tipo_pagamentoUncheckedCreateWithoutDepositoInput = {
-    tipo_pagamento_id: number
+    tipo_pagamento_id?: number
     pagamento_id: number
     boleto_id: number
     cartao_id: number
@@ -7613,15 +7601,14 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoCreateWithoutCartaoInput = {
-    tipo_pagamento_id: number
     tipo_pagamento_status: number
-    pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
     boleto: boletoCreateNestedOneWithoutTipo_pagamentoInput
     deposito: depositoCreateNestedOneWithoutTipo_pagamentoInput
+    pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
   }
 
   export type tipo_pagamentoUncheckedCreateWithoutCartaoInput = {
-    tipo_pagamento_id: number
+    tipo_pagamento_id?: number
     pagamento_id: number
     boleto_id: number
     deposito_id: number
@@ -7654,28 +7641,7 @@ export namespace Prisma {
     data: XOR<tipo_pagamentoUpdateManyMutationInput, tipo_pagamentoUncheckedUpdateManyWithoutCartaoInput>
   }
 
-  export type pagamentoCreateWithoutTipo_pagamentoInput = {
-    pagamento_tipo: string
-    pagamento_status: number
-    pagamento_data: Date | string
-    pagamento_endereco: string
-  }
-
-  export type pagamentoUncheckedCreateWithoutTipo_pagamentoInput = {
-    pagamento_id?: number
-    pagamento_tipo: string
-    pagamento_status: number
-    pagamento_data: Date | string
-    pagamento_endereco: string
-  }
-
-  export type pagamentoCreateOrConnectWithoutTipo_pagamentoInput = {
-    where: pagamentoWhereUniqueInput
-    create: XOR<pagamentoCreateWithoutTipo_pagamentoInput, pagamentoUncheckedCreateWithoutTipo_pagamentoInput>
-  }
-
   export type boletoCreateWithoutTipo_pagamentoInput = {
-    boleto_id: number
     boleto_numero: string
     boleto_vencimento: Date | string
     boleto_emissao: Date | string
@@ -7683,7 +7649,7 @@ export namespace Prisma {
   }
 
   export type boletoUncheckedCreateWithoutTipo_pagamentoInput = {
-    boleto_id: number
+    boleto_id?: number
     boleto_numero: string
     boleto_vencimento: Date | string
     boleto_emissao: Date | string
@@ -7693,29 +7659,6 @@ export namespace Prisma {
   export type boletoCreateOrConnectWithoutTipo_pagamentoInput = {
     where: boletoWhereUniqueInput
     create: XOR<boletoCreateWithoutTipo_pagamentoInput, boletoUncheckedCreateWithoutTipo_pagamentoInput>
-  }
-
-  export type depositoCreateWithoutTipo_pagamentoInput = {
-    deposito_id: number
-    deposito_banco: string
-    deposito_valor: number
-    deposito_agencia: string
-    deposito_conta: string
-    deposito_status: number
-  }
-
-  export type depositoUncheckedCreateWithoutTipo_pagamentoInput = {
-    deposito_id: number
-    deposito_banco: string
-    deposito_valor: number
-    deposito_agencia: string
-    deposito_conta: string
-    deposito_status: number
-  }
-
-  export type depositoCreateOrConnectWithoutTipo_pagamentoInput = {
-    where: depositoWhereUniqueInput
-    create: XOR<depositoCreateWithoutTipo_pagamentoInput, depositoUncheckedCreateWithoutTipo_pagamentoInput>
   }
 
   export type cartaoCreateWithoutTipo_pagamentoInput = {
@@ -7742,30 +7685,46 @@ export namespace Prisma {
     create: XOR<cartaoCreateWithoutTipo_pagamentoInput, cartaoUncheckedCreateWithoutTipo_pagamentoInput>
   }
 
-  export type pagamentoUpsertWithoutTipo_pagamentoInput = {
-    update: XOR<pagamentoUpdateWithoutTipo_pagamentoInput, pagamentoUncheckedUpdateWithoutTipo_pagamentoInput>
+  export type depositoCreateWithoutTipo_pagamentoInput = {
+    deposito_banco: string
+    deposito_valor: number
+    deposito_agencia: string
+    deposito_conta: string
+    deposito_status: number
+  }
+
+  export type depositoUncheckedCreateWithoutTipo_pagamentoInput = {
+    deposito_id?: number
+    deposito_banco: string
+    deposito_valor: number
+    deposito_agencia: string
+    deposito_conta: string
+    deposito_status: number
+  }
+
+  export type depositoCreateOrConnectWithoutTipo_pagamentoInput = {
+    where: depositoWhereUniqueInput
+    create: XOR<depositoCreateWithoutTipo_pagamentoInput, depositoUncheckedCreateWithoutTipo_pagamentoInput>
+  }
+
+  export type pagamentoCreateWithoutTipo_pagamentoInput = {
+    pagamento_tipo: string
+    pagamento_status: number
+    pagamento_data: Date | string
+    pagamento_endereco: string
+  }
+
+  export type pagamentoUncheckedCreateWithoutTipo_pagamentoInput = {
+    pagamento_id?: number
+    pagamento_tipo: string
+    pagamento_status: number
+    pagamento_data: Date | string
+    pagamento_endereco: string
+  }
+
+  export type pagamentoCreateOrConnectWithoutTipo_pagamentoInput = {
+    where: pagamentoWhereUniqueInput
     create: XOR<pagamentoCreateWithoutTipo_pagamentoInput, pagamentoUncheckedCreateWithoutTipo_pagamentoInput>
-    where?: pagamentoWhereInput
-  }
-
-  export type pagamentoUpdateToOneWithWhereWithoutTipo_pagamentoInput = {
-    where?: pagamentoWhereInput
-    data: XOR<pagamentoUpdateWithoutTipo_pagamentoInput, pagamentoUncheckedUpdateWithoutTipo_pagamentoInput>
-  }
-
-  export type pagamentoUpdateWithoutTipo_pagamentoInput = {
-    pagamento_tipo?: StringFieldUpdateOperationsInput | string
-    pagamento_status?: IntFieldUpdateOperationsInput | number
-    pagamento_data?: DateTimeFieldUpdateOperationsInput | Date | string
-    pagamento_endereco?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type pagamentoUncheckedUpdateWithoutTipo_pagamentoInput = {
-    pagamento_id?: IntFieldUpdateOperationsInput | number
-    pagamento_tipo?: StringFieldUpdateOperationsInput | string
-    pagamento_status?: IntFieldUpdateOperationsInput | number
-    pagamento_data?: DateTimeFieldUpdateOperationsInput | Date | string
-    pagamento_endereco?: StringFieldUpdateOperationsInput | string
   }
 
   export type boletoUpsertWithoutTipo_pagamentoInput = {
@@ -7780,7 +7739,6 @@ export namespace Prisma {
   }
 
   export type boletoUpdateWithoutTipo_pagamentoInput = {
-    boleto_id?: IntFieldUpdateOperationsInput | number
     boleto_numero?: StringFieldUpdateOperationsInput | string
     boleto_vencimento?: DateTimeFieldUpdateOperationsInput | Date | string
     boleto_emissao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7793,35 +7751,6 @@ export namespace Prisma {
     boleto_vencimento?: DateTimeFieldUpdateOperationsInput | Date | string
     boleto_emissao?: DateTimeFieldUpdateOperationsInput | Date | string
     boleto_status?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type depositoUpsertWithoutTipo_pagamentoInput = {
-    update: XOR<depositoUpdateWithoutTipo_pagamentoInput, depositoUncheckedUpdateWithoutTipo_pagamentoInput>
-    create: XOR<depositoCreateWithoutTipo_pagamentoInput, depositoUncheckedCreateWithoutTipo_pagamentoInput>
-    where?: depositoWhereInput
-  }
-
-  export type depositoUpdateToOneWithWhereWithoutTipo_pagamentoInput = {
-    where?: depositoWhereInput
-    data: XOR<depositoUpdateWithoutTipo_pagamentoInput, depositoUncheckedUpdateWithoutTipo_pagamentoInput>
-  }
-
-  export type depositoUpdateWithoutTipo_pagamentoInput = {
-    deposito_id?: IntFieldUpdateOperationsInput | number
-    deposito_banco?: StringFieldUpdateOperationsInput | string
-    deposito_valor?: FloatFieldUpdateOperationsInput | number
-    deposito_agencia?: StringFieldUpdateOperationsInput | string
-    deposito_conta?: StringFieldUpdateOperationsInput | string
-    deposito_status?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type depositoUncheckedUpdateWithoutTipo_pagamentoInput = {
-    deposito_id?: IntFieldUpdateOperationsInput | number
-    deposito_banco?: StringFieldUpdateOperationsInput | string
-    deposito_valor?: FloatFieldUpdateOperationsInput | number
-    deposito_agencia?: StringFieldUpdateOperationsInput | string
-    deposito_conta?: StringFieldUpdateOperationsInput | string
-    deposito_status?: IntFieldUpdateOperationsInput | number
   }
 
   export type cartaoUpsertWithoutTipo_pagamentoInput = {
@@ -7854,8 +7783,62 @@ export namespace Prisma {
     cartao_status?: IntFieldUpdateOperationsInput | number
   }
 
+  export type depositoUpsertWithoutTipo_pagamentoInput = {
+    update: XOR<depositoUpdateWithoutTipo_pagamentoInput, depositoUncheckedUpdateWithoutTipo_pagamentoInput>
+    create: XOR<depositoCreateWithoutTipo_pagamentoInput, depositoUncheckedCreateWithoutTipo_pagamentoInput>
+    where?: depositoWhereInput
+  }
+
+  export type depositoUpdateToOneWithWhereWithoutTipo_pagamentoInput = {
+    where?: depositoWhereInput
+    data: XOR<depositoUpdateWithoutTipo_pagamentoInput, depositoUncheckedUpdateWithoutTipo_pagamentoInput>
+  }
+
+  export type depositoUpdateWithoutTipo_pagamentoInput = {
+    deposito_banco?: StringFieldUpdateOperationsInput | string
+    deposito_valor?: FloatFieldUpdateOperationsInput | number
+    deposito_agencia?: StringFieldUpdateOperationsInput | string
+    deposito_conta?: StringFieldUpdateOperationsInput | string
+    deposito_status?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type depositoUncheckedUpdateWithoutTipo_pagamentoInput = {
+    deposito_id?: IntFieldUpdateOperationsInput | number
+    deposito_banco?: StringFieldUpdateOperationsInput | string
+    deposito_valor?: FloatFieldUpdateOperationsInput | number
+    deposito_agencia?: StringFieldUpdateOperationsInput | string
+    deposito_conta?: StringFieldUpdateOperationsInput | string
+    deposito_status?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type pagamentoUpsertWithoutTipo_pagamentoInput = {
+    update: XOR<pagamentoUpdateWithoutTipo_pagamentoInput, pagamentoUncheckedUpdateWithoutTipo_pagamentoInput>
+    create: XOR<pagamentoCreateWithoutTipo_pagamentoInput, pagamentoUncheckedCreateWithoutTipo_pagamentoInput>
+    where?: pagamentoWhereInput
+  }
+
+  export type pagamentoUpdateToOneWithWhereWithoutTipo_pagamentoInput = {
+    where?: pagamentoWhereInput
+    data: XOR<pagamentoUpdateWithoutTipo_pagamentoInput, pagamentoUncheckedUpdateWithoutTipo_pagamentoInput>
+  }
+
+  export type pagamentoUpdateWithoutTipo_pagamentoInput = {
+    pagamento_tipo?: StringFieldUpdateOperationsInput | string
+    pagamento_status?: IntFieldUpdateOperationsInput | number
+    pagamento_data?: DateTimeFieldUpdateOperationsInput | Date | string
+    pagamento_endereco?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type pagamentoUncheckedUpdateWithoutTipo_pagamentoInput = {
+    pagamento_id?: IntFieldUpdateOperationsInput | number
+    pagamento_tipo?: StringFieldUpdateOperationsInput | string
+    pagamento_status?: IntFieldUpdateOperationsInput | number
+    pagamento_data?: DateTimeFieldUpdateOperationsInput | Date | string
+    pagamento_endereco?: StringFieldUpdateOperationsInput | string
+  }
+
   export type tipo_pagamentoCreateManyPagamentoInput = {
-    tipo_pagamento_id: number
+    tipo_pagamento_id?: number
     boleto_id: number
     deposito_id: number
     cartao_id: number
@@ -7863,11 +7846,10 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoUpdateWithoutPagamentoInput = {
-    tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
     boleto?: boletoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
-    deposito?: depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
     cartao?: cartaoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    deposito?: depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
   }
 
   export type tipo_pagamentoUncheckedUpdateWithoutPagamentoInput = {
@@ -7887,7 +7869,7 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoCreateManyBoletoInput = {
-    tipo_pagamento_id: number
+    tipo_pagamento_id?: number
     pagamento_id: number
     deposito_id: number
     cartao_id: number
@@ -7895,11 +7877,10 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoUpdateWithoutBoletoInput = {
-    tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
-    pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
-    deposito?: depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
     cartao?: cartaoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    deposito?: depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
   }
 
   export type tipo_pagamentoUncheckedUpdateWithoutBoletoInput = {
@@ -7919,7 +7900,7 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoCreateManyDepositoInput = {
-    tipo_pagamento_id: number
+    tipo_pagamento_id?: number
     pagamento_id: number
     boleto_id: number
     cartao_id: number
@@ -7927,11 +7908,10 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoUpdateWithoutDepositoInput = {
-    tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
-    pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
     boleto?: boletoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
     cartao?: cartaoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
   }
 
   export type tipo_pagamentoUncheckedUpdateWithoutDepositoInput = {
@@ -7951,7 +7931,7 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoCreateManyCartaoInput = {
-    tipo_pagamento_id: number
+    tipo_pagamento_id?: number
     pagamento_id: number
     boleto_id: number
     deposito_id: number
@@ -7959,11 +7939,10 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoUpdateWithoutCartaoInput = {
-    tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
-    pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
     boleto?: boletoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
     deposito?: depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
   }
 
   export type tipo_pagamentoUncheckedUpdateWithoutCartaoInput = {
