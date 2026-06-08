@@ -20,34 +20,28 @@ const tipoPagamentoRoutes = require('./routes/tipoPagamentoRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 9534;
-const BASE = '/hotel/pagamento';
 
 // Middlewares globais
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// DEBUG TEMPORÁRIO - remover depois
-app.use((req, res, next) => {
-  console.log(`[DEBUG] Rota recebida: ${req.method} ${req.url}`);
-  next();
-});
 // Swagger
-app.use(`${BASE}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Rotas
-app.use(`${BASE}/auth`, authRoutes);
-app.use(`${BASE}/pagamentos`, pagamentoRoutes);
-app.use(`${BASE}/boletos`, boletoRoutes);
-app.use(`${BASE}/depositos`, depositoRoutes);
-app.use(`${BASE}/cartoes`, cartaoRoutes);
-app.use(`${BASE}/tipo-pagamento`, tipoPagamentoRoutes);
+app.use('/auth', authRoutes);
+app.use('/pagamentos', pagamentoRoutes);
+app.use('/boletos', boletoRoutes);
+app.use('/depositos', depositoRoutes);
+app.use('/cartoes', cartaoRoutes);
+app.use('/tipo-pagamento', tipoPagamentoRoutes);
 
 // Health check
-app.get(BASE, (req, res) => {
+app.get('/', (req, res) => {
   res.status(200).json({
     service: 'Hotel Pagamento API',
     status: 'online',
-    docs: `${BASE}/api-docs`,
+    docs: '/api-docs',
     version: '1.0.0',
   });
 });
@@ -69,9 +63,8 @@ iniciarServicos();
 
 app.listen(PORT, () => {
   console.log(`[Server] Hotel Pagamento API rodando na porta ${PORT}`);
-  console.log(`[Server] Local: http://localhost:${PORT}${BASE}`);
-  console.log(`[Server] Produção: http://academico3.rj.senac.br/20261prj5${BASE}`);
-  console.log(`[Swagger] Docs: http://academico3.rj.senac.br/20261prj5${BASE}/api-docs`);
+  console.log(`[Server] Produção: http://academico3.rj.senac.br/20261prj5/hotel/pagamento`);
+  console.log(`[Swagger] Docs: http://academico3.rj.senac.br/20261prj5/hotel/pagamento/api-docs`);
 });
 
 module.exports = app;
