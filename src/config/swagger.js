@@ -14,7 +14,7 @@ const options = {
         description: 'Servidor da faculdade',
       },
       {
-        url: `http://localhost:${process.env.PORT || 9534}/20261prj5/hotel/pagamento`,
+        url: `http://localhost:${process.env.PORT || 9534}`,
         description: 'Servidor local',
       },
     ],
