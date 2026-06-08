@@ -8,7 +8,6 @@ const swaggerSpec = require('./config/swagger');
 const { connectRabbitMQ } = require('./config/rabbitmq');
 const { startPagamentoConsumer } = require('./consumers/pagamentoConsumer');
 const { iniciarConsumerReserva } = require('./consumers/reservaConsumer');
-// NOVA LINHA: Importando o consumidor de cliente do seu amigo
 const { iniciarConsumidorCliente } = require('./consumers/clienteConsumer'); 
 
 // Routes
@@ -21,9 +20,7 @@ const tipoPagamentoRoutes = require('./routes/tipoPagamentoRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 9534;
-
-// Alteração da rota base para incluir o prefixo do ambiente acadêmico
-const BASE = '/20261prj5/hotel/pagamento';
+const BASE = '/hotel/pagamento';
 
 // Middlewares globais
 app.use(express.json());
@@ -56,24 +53,20 @@ async function iniciarServicos() {
     await connectRabbitMQ();
     await startPagamentoConsumer();
     await iniciarConsumerReserva();
-    // NOVA LINHA: Iniciando o consumidor de cliente
     await iniciarConsumidorCliente(); 
-    
     console.log(`🚀 Todos os serviços de mensageria estão ativos!`);
   } catch (err) {
     console.warn('[Server] Serviços de mensageria não foram iniciados:', err.message);
   }
 }
 
-// Inicia RabbitMQ
 iniciarServicos();
 
-// Inicia servidor
 app.listen(PORT, () => {
   console.log(`[Server] Hotel Pagamento API rodando na porta ${PORT}`);
-  console.log(`[Server] Base path local: http://localhost:${PORT}${BASE}`);
-  console.log(`[Server] URL de Produção: http://academico3.rj.senac.br${BASE}`);
-  console.log(`[Swagger] Documentação disponível em: http://academico3.rj.senac.br${BASE}/api-docs`);
+  console.log(`[Server] Local: http://localhost:${PORT}${BASE}`);
+  console.log(`[Server] Produção: http://academico3.rj.senac.br/20261prj5${BASE}`);
+  console.log(`[Swagger] Docs: http://academico3.rj.senac.br/20261prj5${BASE}/api-docs`);
 });
 
 module.exports = app;
