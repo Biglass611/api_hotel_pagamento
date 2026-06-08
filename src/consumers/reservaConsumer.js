@@ -1,14 +1,14 @@
-const { getCanal } = require('../config/rabbitmq');
-const prisma = require('../config/prisma');
+const { getChannel } = require('../config/rabbitmq');
+// Correção: Apontando para o nome real do arquivo na pasta config
+const prisma = require('../config/prismaClient');
 
 const iniciarConsumerReserva = async () => {
     try {
-        const canal = getCanal();
-        if (!canal) throw new Error('Canal RabbitMQ não disponível para o Consumer.');
+        const canal = getChannel();
+        if (!canal) throw new Error('Canal RabbitMQ não disponível para ReservaConsumer.');
 
-        // Nome da fila que o serviço de Reserva vai usar para publicar que um quarto foi alugado
         const nomeFila = 'reserva_status'; 
-
+        
         await canal.assertQueue(nomeFila, { durable: true });
 
         console.log(`🎧 [Consumer] A escutar eventos na fila '${nomeFila}'...`);
@@ -20,25 +20,26 @@ const iniciarConsumerReserva = async () => {
                 console.log(`📥 [Consumer] Recebida confirmação de reserva:`, dadosReserva);
 
                 try {
-                    // Atualiza o cliente no Prisma com o quarto_id recebido da Reserva
-                    await prisma.cliente.update({
-                        where: { cliente_id: parseInt(dadosReserva.cliente_id) },
-                        data: { quarto_id: parseInt(dadosReserva.quarto_id) }
+                    const novoPagamento = await prisma.pagamento.create({
+                        data: {
+                            pagamento_tipo: dadosReserva.tipo_pagamento || 'A DEFINIR', 
+                            pagamento_status: 0, 
+                            pagamento_data: new Date(),
+                            pagamento_endereco: dadosReserva.endereco || 'Endereço não informado'
+                        }
                     });
 
-                    console.log(`✅ [Consumer] Cliente ${dadosReserva.cliente_id} atualizado com o Quarto ${dadosReserva.quarto_id}`);
+                    console.log(`✅ [Consumer] Pagamento ID ${novoPagamento.pagamento_id} gerado com sucesso!`);
                     
-                    // Confirma ao RabbitMQ que a mensagem foi processada com sucesso
                     canal.ack(mensagem);
                 } catch (erroPrisma) {
-                    console.error(`❌ [Consumer] Erro ao atualizar cliente no banco:`, erroPrisma);
-                    // Em caso de erro grave (ex: cliente não existe), não devolvemos a mensagem para a fila infinitamente
+                    console.error(`❌ [Consumer] Erro ao salvar pagamento no banco de dados:`, erroPrisma.message);
                     canal.nack(mensagem, false, false); 
                 }
             }
         });
     } catch (erro) {
-        console.error('❌ Erro ao iniciar o Consumer de Reserva:', erro);
+        console.error('❌ Erro ao iniciar o Consumer de Reserva:', erro.message);
     }
 };
 

@@ -3,7 +3,13 @@ require('dotenv').config();
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
+
+// Importações do RabbitMQ e Consumidores
+const { connectRabbitMQ } = require('./config/rabbitmq');
 const { startPagamentoConsumer } = require('./consumers/pagamentoConsumer');
+const { iniciarConsumerReserva } = require('./consumers/reservaConsumer');
+// NOVA LINHA: Importando o consumidor de cliente do seu amigo
+const { iniciarConsumidorCliente } = require('./consumers/clienteConsumer'); 
 
 // Routes
 const authRoutes = require('./routes/authRoutes');
@@ -15,7 +21,9 @@ const tipoPagamentoRoutes = require('./routes/tipoPagamentoRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 9534;
-const BASE = '/hotel/pagamento';
+
+// Alteração da rota base para incluir o prefixo do ambiente acadêmico
+const BASE = '/20261prj5/hotel/pagamento';
 
 // Middlewares globais
 app.use(express.json());
@@ -42,16 +50,30 @@ app.get(BASE, (req, res) => {
   });
 });
 
-// Inicia RabbitMQ Consumer (não bloqueia a API em caso de falha)
-startPagamentoConsumer().catch((err) => {
-  console.warn('[RabbitMQ] Consumer não iniciado:', err.message);
-});
+// Orquestração de inicialização do RabbitMQ e Consumers
+async function iniciarServicos() {
+  try {
+    await connectRabbitMQ();
+    await startPagamentoConsumer();
+    await iniciarConsumerReserva();
+    // NOVA LINHA: Iniciando o consumidor de cliente
+    await iniciarConsumidorCliente(); 
+    
+    console.log(`🚀 Todos os serviços de mensageria estão ativos!`);
+  } catch (err) {
+    console.warn('[Server] Serviços de mensageria não foram iniciados:', err.message);
+  }
+}
+
+// Inicia RabbitMQ
+iniciarServicos();
 
 // Inicia servidor
 app.listen(PORT, () => {
   console.log(`[Server] Hotel Pagamento API rodando na porta ${PORT}`);
-  console.log(`[Server] Base path: http://localhost:${PORT}${BASE}`);
-  console.log(`[Swagger] Documentação disponível em http://localhost:${PORT}${BASE}/api-docs`);
+  console.log(`[Server] Base path local: http://localhost:${PORT}${BASE}`);
+  console.log(`[Server] URL de Produção: http://academico3.rj.senac.br${BASE}`);
+  console.log(`[Swagger] Documentação disponível em: http://academico3.rj.senac.br${BASE}/api-docs`);
 });
 
 module.exports = app;
