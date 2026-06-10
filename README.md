@@ -271,3 +271,41 @@ Authorization: Bearer <token>
   "tipo_pagamento_status": 1
 }
 ```
+
+### Exemplos de Requests
+
+POST /auth/login
+{
+  "usuario": "admin",
+  "senha": "admin123"
+}
+
+
+### Criar Pagamento
+
+POST /pagamentos
+Authorization: Bearer <token>
+{
+  "pagamento_tipo": "cartao",
+  "pagamento_status": 1,
+  "pagamento_data": "2025-06-01T10:00:00",
+  "pagamento_endereco": "Rua das Flores, 123"
+}
+
+### Patch Pagamento (atualiza só o status)
+PATCH /pagamentos/1
+Authorization: Bearer <token>
+{
+  "pagamento_status": 2
+}
+
+### Criar Boleto
+POST /boletos
+Authorization: Bearer <token>
+{
+  "boleto_id": 1,
+  "boleto_numero": "34191.75009 01237.961236 61980.260008 1 10100000017000",
+  "boleto_vencimento": "2025-07-01T00:00:00",
+  "boleto_emissao": "2025-06-01T00:00:00",
+  "boleto_status": 1
+}

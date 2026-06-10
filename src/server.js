@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors'); // <-- ADICIONADO: Importação do pacote CORS
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
 
@@ -22,8 +23,9 @@ const app = express();
 const PORT = process.env.PORT || 9534;
 
 // Middlewares globais
+app.use(cors()); // <-- ADICIONADO: Libera o acesso da API para outras origens (Front-end)
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); // <-- MANTIDO: Isso aqui ajuda no parser de dados de formulários
 
 // Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { customSiteTitle: 'Hotel Pagamento API' }));
