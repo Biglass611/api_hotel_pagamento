@@ -5277,9 +5277,9 @@ export namespace Prisma {
   export type Tipo_pagamentoGroupByOutputType = {
     tipo_pagamento_id: number
     pagamento_id: number
-    boleto_id: number
-    deposito_id: number
-    cartao_id: number
+    boleto_id: number | null
+    deposito_id: number | null
+    cartao_id: number | null
     tipo_pagamento_status: number
     _count: Tipo_pagamentoCountAggregateOutputType | null
     _avg: Tipo_pagamentoAvgAggregateOutputType | null
@@ -5309,9 +5309,9 @@ export namespace Prisma {
     deposito_id?: boolean
     cartao_id?: boolean
     tipo_pagamento_status?: boolean
-    boleto?: boolean | boletoDefaultArgs<ExtArgs>
-    cartao?: boolean | cartaoDefaultArgs<ExtArgs>
-    deposito?: boolean | depositoDefaultArgs<ExtArgs>
+    boleto?: boolean | tipo_pagamento$boletoArgs<ExtArgs>
+    cartao?: boolean | tipo_pagamento$cartaoArgs<ExtArgs>
+    deposito?: boolean | tipo_pagamento$depositoArgs<ExtArgs>
     pagamento?: boolean | pagamentoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tipo_pagamento"]>
 
@@ -5326,26 +5326,26 @@ export namespace Prisma {
   }
 
   export type tipo_pagamentoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    boleto?: boolean | boletoDefaultArgs<ExtArgs>
-    cartao?: boolean | cartaoDefaultArgs<ExtArgs>
-    deposito?: boolean | depositoDefaultArgs<ExtArgs>
+    boleto?: boolean | tipo_pagamento$boletoArgs<ExtArgs>
+    cartao?: boolean | tipo_pagamento$cartaoArgs<ExtArgs>
+    deposito?: boolean | tipo_pagamento$depositoArgs<ExtArgs>
     pagamento?: boolean | pagamentoDefaultArgs<ExtArgs>
   }
 
   export type $tipo_pagamentoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "tipo_pagamento"
     objects: {
-      boleto: Prisma.$boletoPayload<ExtArgs>
-      cartao: Prisma.$cartaoPayload<ExtArgs>
-      deposito: Prisma.$depositoPayload<ExtArgs>
+      boleto: Prisma.$boletoPayload<ExtArgs> | null
+      cartao: Prisma.$cartaoPayload<ExtArgs> | null
+      deposito: Prisma.$depositoPayload<ExtArgs> | null
       pagamento: Prisma.$pagamentoPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       tipo_pagamento_id: number
       pagamento_id: number
-      boleto_id: number
-      deposito_id: number
-      cartao_id: number
+      boleto_id: number | null
+      deposito_id: number | null
+      cartao_id: number | null
       tipo_pagamento_status: number
     }, ExtArgs["result"]["tipo_pagamento"]>
     composites: {}
@@ -5687,9 +5687,9 @@ export namespace Prisma {
    */
   export interface Prisma__tipo_pagamentoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    boleto<T extends boletoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, boletoDefaultArgs<ExtArgs>>): Prisma__boletoClient<$Result.GetResult<Prisma.$boletoPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    cartao<T extends cartaoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, cartaoDefaultArgs<ExtArgs>>): Prisma__cartaoClient<$Result.GetResult<Prisma.$cartaoPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    deposito<T extends depositoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, depositoDefaultArgs<ExtArgs>>): Prisma__depositoClient<$Result.GetResult<Prisma.$depositoPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    boleto<T extends tipo_pagamento$boletoArgs<ExtArgs> = {}>(args?: Subset<T, tipo_pagamento$boletoArgs<ExtArgs>>): Prisma__boletoClient<$Result.GetResult<Prisma.$boletoPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    cartao<T extends tipo_pagamento$cartaoArgs<ExtArgs> = {}>(args?: Subset<T, tipo_pagamento$cartaoArgs<ExtArgs>>): Prisma__cartaoClient<$Result.GetResult<Prisma.$cartaoPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    deposito<T extends tipo_pagamento$depositoArgs<ExtArgs> = {}>(args?: Subset<T, tipo_pagamento$depositoArgs<ExtArgs>>): Prisma__depositoClient<$Result.GetResult<Prisma.$depositoPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     pagamento<T extends pagamentoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, pagamentoDefaultArgs<ExtArgs>>): Prisma__pagamentoClient<$Result.GetResult<Prisma.$pagamentoPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6025,6 +6025,51 @@ export namespace Prisma {
   }
 
   /**
+   * tipo_pagamento.boleto
+   */
+  export type tipo_pagamento$boletoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the boleto
+     */
+    select?: boletoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: boletoInclude<ExtArgs> | null
+    where?: boletoWhereInput
+  }
+
+  /**
+   * tipo_pagamento.cartao
+   */
+  export type tipo_pagamento$cartaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the cartao
+     */
+    select?: cartaoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: cartaoInclude<ExtArgs> | null
+    where?: cartaoWhereInput
+  }
+
+  /**
+   * tipo_pagamento.deposito
+   */
+  export type tipo_pagamento$depositoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the deposito
+     */
+    select?: depositoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: depositoInclude<ExtArgs> | null
+    where?: depositoWhereInput
+  }
+
+  /**
    * tipo_pagamento without action
    */
   export type tipo_pagamentoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6118,6 +6163,14 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -6405,22 +6458,22 @@ export namespace Prisma {
     NOT?: tipo_pagamentoWhereInput | tipo_pagamentoWhereInput[]
     tipo_pagamento_id?: IntFilter<"tipo_pagamento"> | number
     pagamento_id?: IntFilter<"tipo_pagamento"> | number
-    boleto_id?: IntFilter<"tipo_pagamento"> | number
-    deposito_id?: IntFilter<"tipo_pagamento"> | number
-    cartao_id?: IntFilter<"tipo_pagamento"> | number
+    boleto_id?: IntNullableFilter<"tipo_pagamento"> | number | null
+    deposito_id?: IntNullableFilter<"tipo_pagamento"> | number | null
+    cartao_id?: IntNullableFilter<"tipo_pagamento"> | number | null
     tipo_pagamento_status?: IntFilter<"tipo_pagamento"> | number
-    boleto?: XOR<BoletoRelationFilter, boletoWhereInput>
-    cartao?: XOR<CartaoRelationFilter, cartaoWhereInput>
-    deposito?: XOR<DepositoRelationFilter, depositoWhereInput>
+    boleto?: XOR<BoletoNullableRelationFilter, boletoWhereInput> | null
+    cartao?: XOR<CartaoNullableRelationFilter, cartaoWhereInput> | null
+    deposito?: XOR<DepositoNullableRelationFilter, depositoWhereInput> | null
     pagamento?: XOR<PagamentoRelationFilter, pagamentoWhereInput>
   }
 
   export type tipo_pagamentoOrderByWithRelationInput = {
     tipo_pagamento_id?: SortOrder
     pagamento_id?: SortOrder
-    boleto_id?: SortOrder
-    deposito_id?: SortOrder
-    cartao_id?: SortOrder
+    boleto_id?: SortOrderInput | SortOrder
+    deposito_id?: SortOrderInput | SortOrder
+    cartao_id?: SortOrderInput | SortOrder
     tipo_pagamento_status?: SortOrder
     boleto?: boletoOrderByWithRelationInput
     cartao?: cartaoOrderByWithRelationInput
@@ -6434,22 +6487,22 @@ export namespace Prisma {
     OR?: tipo_pagamentoWhereInput[]
     NOT?: tipo_pagamentoWhereInput | tipo_pagamentoWhereInput[]
     pagamento_id?: IntFilter<"tipo_pagamento"> | number
-    boleto_id?: IntFilter<"tipo_pagamento"> | number
-    deposito_id?: IntFilter<"tipo_pagamento"> | number
-    cartao_id?: IntFilter<"tipo_pagamento"> | number
+    boleto_id?: IntNullableFilter<"tipo_pagamento"> | number | null
+    deposito_id?: IntNullableFilter<"tipo_pagamento"> | number | null
+    cartao_id?: IntNullableFilter<"tipo_pagamento"> | number | null
     tipo_pagamento_status?: IntFilter<"tipo_pagamento"> | number
-    boleto?: XOR<BoletoRelationFilter, boletoWhereInput>
-    cartao?: XOR<CartaoRelationFilter, cartaoWhereInput>
-    deposito?: XOR<DepositoRelationFilter, depositoWhereInput>
+    boleto?: XOR<BoletoNullableRelationFilter, boletoWhereInput> | null
+    cartao?: XOR<CartaoNullableRelationFilter, cartaoWhereInput> | null
+    deposito?: XOR<DepositoNullableRelationFilter, depositoWhereInput> | null
     pagamento?: XOR<PagamentoRelationFilter, pagamentoWhereInput>
   }, "tipo_pagamento_id">
 
   export type tipo_pagamentoOrderByWithAggregationInput = {
     tipo_pagamento_id?: SortOrder
     pagamento_id?: SortOrder
-    boleto_id?: SortOrder
-    deposito_id?: SortOrder
-    cartao_id?: SortOrder
+    boleto_id?: SortOrderInput | SortOrder
+    deposito_id?: SortOrderInput | SortOrder
+    cartao_id?: SortOrderInput | SortOrder
     tipo_pagamento_status?: SortOrder
     _count?: tipo_pagamentoCountOrderByAggregateInput
     _avg?: tipo_pagamentoAvgOrderByAggregateInput
@@ -6464,9 +6517,9 @@ export namespace Prisma {
     NOT?: tipo_pagamentoScalarWhereWithAggregatesInput | tipo_pagamentoScalarWhereWithAggregatesInput[]
     tipo_pagamento_id?: IntWithAggregatesFilter<"tipo_pagamento"> | number
     pagamento_id?: IntWithAggregatesFilter<"tipo_pagamento"> | number
-    boleto_id?: IntWithAggregatesFilter<"tipo_pagamento"> | number
-    deposito_id?: IntWithAggregatesFilter<"tipo_pagamento"> | number
-    cartao_id?: IntWithAggregatesFilter<"tipo_pagamento"> | number
+    boleto_id?: IntNullableWithAggregatesFilter<"tipo_pagamento"> | number | null
+    deposito_id?: IntNullableWithAggregatesFilter<"tipo_pagamento"> | number | null
+    cartao_id?: IntNullableWithAggregatesFilter<"tipo_pagamento"> | number | null
     tipo_pagamento_status?: IntWithAggregatesFilter<"tipo_pagamento"> | number
   }
 
@@ -6721,44 +6774,44 @@ export namespace Prisma {
 
   export type tipo_pagamentoCreateInput = {
     tipo_pagamento_status: number
-    boleto: boletoCreateNestedOneWithoutTipo_pagamentoInput
-    cartao: cartaoCreateNestedOneWithoutTipo_pagamentoInput
-    deposito: depositoCreateNestedOneWithoutTipo_pagamentoInput
+    boleto?: boletoCreateNestedOneWithoutTipo_pagamentoInput
+    cartao?: cartaoCreateNestedOneWithoutTipo_pagamentoInput
+    deposito?: depositoCreateNestedOneWithoutTipo_pagamentoInput
     pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
   }
 
   export type tipo_pagamentoUncheckedCreateInput = {
     tipo_pagamento_id?: number
     pagamento_id: number
-    boleto_id: number
-    deposito_id: number
-    cartao_id: number
+    boleto_id?: number | null
+    deposito_id?: number | null
+    cartao_id?: number | null
     tipo_pagamento_status: number
   }
 
   export type tipo_pagamentoUpdateInput = {
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
-    boleto?: boletoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
-    cartao?: cartaoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
-    deposito?: depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    boleto?: boletoUpdateOneWithoutTipo_pagamentoNestedInput
+    cartao?: cartaoUpdateOneWithoutTipo_pagamentoNestedInput
+    deposito?: depositoUpdateOneWithoutTipo_pagamentoNestedInput
     pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
   }
 
   export type tipo_pagamentoUncheckedUpdateInput = {
     tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     pagamento_id?: IntFieldUpdateOperationsInput | number
-    boleto_id?: IntFieldUpdateOperationsInput | number
-    deposito_id?: IntFieldUpdateOperationsInput | number
-    cartao_id?: IntFieldUpdateOperationsInput | number
+    boleto_id?: NullableIntFieldUpdateOperationsInput | number | null
+    deposito_id?: NullableIntFieldUpdateOperationsInput | number | null
+    cartao_id?: NullableIntFieldUpdateOperationsInput | number | null
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
   }
 
   export type tipo_pagamentoCreateManyInput = {
     tipo_pagamento_id?: number
     pagamento_id: number
-    boleto_id: number
-    deposito_id: number
-    cartao_id: number
+    boleto_id?: number | null
+    deposito_id?: number | null
+    cartao_id?: number | null
     tipo_pagamento_status: number
   }
 
@@ -6769,9 +6822,9 @@ export namespace Prisma {
   export type tipo_pagamentoUncheckedUpdateManyInput = {
     tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     pagamento_id?: IntFieldUpdateOperationsInput | number
-    boleto_id?: IntFieldUpdateOperationsInput | number
-    deposito_id?: IntFieldUpdateOperationsInput | number
-    cartao_id?: IntFieldUpdateOperationsInput | number
+    boleto_id?: NullableIntFieldUpdateOperationsInput | number | null
+    deposito_id?: NullableIntFieldUpdateOperationsInput | number | null
+    cartao_id?: NullableIntFieldUpdateOperationsInput | number | null
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
   }
 
@@ -7042,24 +7095,40 @@ export namespace Prisma {
     cartao_status?: SortOrder
   }
 
-  export type BoletoRelationFilter = {
-    is?: boletoWhereInput
-    isNot?: boletoWhereInput
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type CartaoRelationFilter = {
-    is?: cartaoWhereInput
-    isNot?: cartaoWhereInput
+  export type BoletoNullableRelationFilter = {
+    is?: boletoWhereInput | null
+    isNot?: boletoWhereInput | null
   }
 
-  export type DepositoRelationFilter = {
-    is?: depositoWhereInput
-    isNot?: depositoWhereInput
+  export type CartaoNullableRelationFilter = {
+    is?: cartaoWhereInput | null
+    isNot?: cartaoWhereInput | null
+  }
+
+  export type DepositoNullableRelationFilter = {
+    is?: depositoWhereInput | null
+    isNot?: depositoWhereInput | null
   }
 
   export type PagamentoRelationFilter = {
     is?: pagamentoWhereInput
     isNot?: pagamentoWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type tipo_pagamentoCountOrderByAggregateInput = {
@@ -7105,6 +7174,22 @@ export namespace Prisma {
     deposito_id?: SortOrder
     cartao_id?: SortOrder
     tipo_pagamento_status?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type tipo_pagamentoCreateNestedManyWithoutPagamentoInput = {
@@ -7323,26 +7408,32 @@ export namespace Prisma {
     connect?: pagamentoWhereUniqueInput
   }
 
-  export type boletoUpdateOneRequiredWithoutTipo_pagamentoNestedInput = {
+  export type boletoUpdateOneWithoutTipo_pagamentoNestedInput = {
     create?: XOR<boletoCreateWithoutTipo_pagamentoInput, boletoUncheckedCreateWithoutTipo_pagamentoInput>
     connectOrCreate?: boletoCreateOrConnectWithoutTipo_pagamentoInput
     upsert?: boletoUpsertWithoutTipo_pagamentoInput
+    disconnect?: boletoWhereInput | boolean
+    delete?: boletoWhereInput | boolean
     connect?: boletoWhereUniqueInput
     update?: XOR<XOR<boletoUpdateToOneWithWhereWithoutTipo_pagamentoInput, boletoUpdateWithoutTipo_pagamentoInput>, boletoUncheckedUpdateWithoutTipo_pagamentoInput>
   }
 
-  export type cartaoUpdateOneRequiredWithoutTipo_pagamentoNestedInput = {
+  export type cartaoUpdateOneWithoutTipo_pagamentoNestedInput = {
     create?: XOR<cartaoCreateWithoutTipo_pagamentoInput, cartaoUncheckedCreateWithoutTipo_pagamentoInput>
     connectOrCreate?: cartaoCreateOrConnectWithoutTipo_pagamentoInput
     upsert?: cartaoUpsertWithoutTipo_pagamentoInput
+    disconnect?: cartaoWhereInput | boolean
+    delete?: cartaoWhereInput | boolean
     connect?: cartaoWhereUniqueInput
     update?: XOR<XOR<cartaoUpdateToOneWithWhereWithoutTipo_pagamentoInput, cartaoUpdateWithoutTipo_pagamentoInput>, cartaoUncheckedUpdateWithoutTipo_pagamentoInput>
   }
 
-  export type depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput = {
+  export type depositoUpdateOneWithoutTipo_pagamentoNestedInput = {
     create?: XOR<depositoCreateWithoutTipo_pagamentoInput, depositoUncheckedCreateWithoutTipo_pagamentoInput>
     connectOrCreate?: depositoCreateOrConnectWithoutTipo_pagamentoInput
     upsert?: depositoUpsertWithoutTipo_pagamentoInput
+    disconnect?: depositoWhereInput | boolean
+    delete?: depositoWhereInput | boolean
     connect?: depositoWhereUniqueInput
     update?: XOR<XOR<depositoUpdateToOneWithWhereWithoutTipo_pagamentoInput, depositoUpdateWithoutTipo_pagamentoInput>, depositoUncheckedUpdateWithoutTipo_pagamentoInput>
   }
@@ -7353,6 +7444,14 @@ export namespace Prisma {
     upsert?: pagamentoUpsertWithoutTipo_pagamentoInput
     connect?: pagamentoWhereUniqueInput
     update?: XOR<XOR<pagamentoUpdateToOneWithWhereWithoutTipo_pagamentoInput, pagamentoUpdateWithoutTipo_pagamentoInput>, pagamentoUncheckedUpdateWithoutTipo_pagamentoInput>
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -7465,18 +7564,56 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type tipo_pagamentoCreateWithoutPagamentoInput = {
     tipo_pagamento_status: number
-    boleto: boletoCreateNestedOneWithoutTipo_pagamentoInput
-    cartao: cartaoCreateNestedOneWithoutTipo_pagamentoInput
-    deposito: depositoCreateNestedOneWithoutTipo_pagamentoInput
+    boleto?: boletoCreateNestedOneWithoutTipo_pagamentoInput
+    cartao?: cartaoCreateNestedOneWithoutTipo_pagamentoInput
+    deposito?: depositoCreateNestedOneWithoutTipo_pagamentoInput
   }
 
   export type tipo_pagamentoUncheckedCreateWithoutPagamentoInput = {
     tipo_pagamento_id?: number
-    boleto_id: number
-    deposito_id: number
-    cartao_id: number
+    boleto_id?: number | null
+    deposito_id?: number | null
+    cartao_id?: number | null
     tipo_pagamento_status: number
   }
 
@@ -7512,24 +7649,24 @@ export namespace Prisma {
     NOT?: tipo_pagamentoScalarWhereInput | tipo_pagamentoScalarWhereInput[]
     tipo_pagamento_id?: IntFilter<"tipo_pagamento"> | number
     pagamento_id?: IntFilter<"tipo_pagamento"> | number
-    boleto_id?: IntFilter<"tipo_pagamento"> | number
-    deposito_id?: IntFilter<"tipo_pagamento"> | number
-    cartao_id?: IntFilter<"tipo_pagamento"> | number
+    boleto_id?: IntNullableFilter<"tipo_pagamento"> | number | null
+    deposito_id?: IntNullableFilter<"tipo_pagamento"> | number | null
+    cartao_id?: IntNullableFilter<"tipo_pagamento"> | number | null
     tipo_pagamento_status?: IntFilter<"tipo_pagamento"> | number
   }
 
   export type tipo_pagamentoCreateWithoutBoletoInput = {
     tipo_pagamento_status: number
-    cartao: cartaoCreateNestedOneWithoutTipo_pagamentoInput
-    deposito: depositoCreateNestedOneWithoutTipo_pagamentoInput
+    cartao?: cartaoCreateNestedOneWithoutTipo_pagamentoInput
+    deposito?: depositoCreateNestedOneWithoutTipo_pagamentoInput
     pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
   }
 
   export type tipo_pagamentoUncheckedCreateWithoutBoletoInput = {
     tipo_pagamento_id?: number
     pagamento_id: number
-    deposito_id: number
-    cartao_id: number
+    deposito_id?: number | null
+    cartao_id?: number | null
     tipo_pagamento_status: number
   }
 
@@ -7561,16 +7698,16 @@ export namespace Prisma {
 
   export type tipo_pagamentoCreateWithoutDepositoInput = {
     tipo_pagamento_status: number
-    boleto: boletoCreateNestedOneWithoutTipo_pagamentoInput
-    cartao: cartaoCreateNestedOneWithoutTipo_pagamentoInput
+    boleto?: boletoCreateNestedOneWithoutTipo_pagamentoInput
+    cartao?: cartaoCreateNestedOneWithoutTipo_pagamentoInput
     pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
   }
 
   export type tipo_pagamentoUncheckedCreateWithoutDepositoInput = {
     tipo_pagamento_id?: number
     pagamento_id: number
-    boleto_id: number
-    cartao_id: number
+    boleto_id?: number | null
+    cartao_id?: number | null
     tipo_pagamento_status: number
   }
 
@@ -7602,16 +7739,16 @@ export namespace Prisma {
 
   export type tipo_pagamentoCreateWithoutCartaoInput = {
     tipo_pagamento_status: number
-    boleto: boletoCreateNestedOneWithoutTipo_pagamentoInput
-    deposito: depositoCreateNestedOneWithoutTipo_pagamentoInput
+    boleto?: boletoCreateNestedOneWithoutTipo_pagamentoInput
+    deposito?: depositoCreateNestedOneWithoutTipo_pagamentoInput
     pagamento: pagamentoCreateNestedOneWithoutTipo_pagamentoInput
   }
 
   export type tipo_pagamentoUncheckedCreateWithoutCartaoInput = {
     tipo_pagamento_id?: number
     pagamento_id: number
-    boleto_id: number
-    deposito_id: number
+    boleto_id?: number | null
+    deposito_id?: number | null
     tipo_pagamento_status: number
   }
 
@@ -7839,125 +7976,125 @@ export namespace Prisma {
 
   export type tipo_pagamentoCreateManyPagamentoInput = {
     tipo_pagamento_id?: number
-    boleto_id: number
-    deposito_id: number
-    cartao_id: number
+    boleto_id?: number | null
+    deposito_id?: number | null
+    cartao_id?: number | null
     tipo_pagamento_status: number
   }
 
   export type tipo_pagamentoUpdateWithoutPagamentoInput = {
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
-    boleto?: boletoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
-    cartao?: cartaoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
-    deposito?: depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    boleto?: boletoUpdateOneWithoutTipo_pagamentoNestedInput
+    cartao?: cartaoUpdateOneWithoutTipo_pagamentoNestedInput
+    deposito?: depositoUpdateOneWithoutTipo_pagamentoNestedInput
   }
 
   export type tipo_pagamentoUncheckedUpdateWithoutPagamentoInput = {
     tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
-    boleto_id?: IntFieldUpdateOperationsInput | number
-    deposito_id?: IntFieldUpdateOperationsInput | number
-    cartao_id?: IntFieldUpdateOperationsInput | number
+    boleto_id?: NullableIntFieldUpdateOperationsInput | number | null
+    deposito_id?: NullableIntFieldUpdateOperationsInput | number | null
+    cartao_id?: NullableIntFieldUpdateOperationsInput | number | null
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
   }
 
   export type tipo_pagamentoUncheckedUpdateManyWithoutPagamentoInput = {
     tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
-    boleto_id?: IntFieldUpdateOperationsInput | number
-    deposito_id?: IntFieldUpdateOperationsInput | number
-    cartao_id?: IntFieldUpdateOperationsInput | number
+    boleto_id?: NullableIntFieldUpdateOperationsInput | number | null
+    deposito_id?: NullableIntFieldUpdateOperationsInput | number | null
+    cartao_id?: NullableIntFieldUpdateOperationsInput | number | null
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
   }
 
   export type tipo_pagamentoCreateManyBoletoInput = {
     tipo_pagamento_id?: number
     pagamento_id: number
-    deposito_id: number
-    cartao_id: number
+    deposito_id?: number | null
+    cartao_id?: number | null
     tipo_pagamento_status: number
   }
 
   export type tipo_pagamentoUpdateWithoutBoletoInput = {
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
-    cartao?: cartaoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
-    deposito?: depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    cartao?: cartaoUpdateOneWithoutTipo_pagamentoNestedInput
+    deposito?: depositoUpdateOneWithoutTipo_pagamentoNestedInput
     pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
   }
 
   export type tipo_pagamentoUncheckedUpdateWithoutBoletoInput = {
     tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     pagamento_id?: IntFieldUpdateOperationsInput | number
-    deposito_id?: IntFieldUpdateOperationsInput | number
-    cartao_id?: IntFieldUpdateOperationsInput | number
+    deposito_id?: NullableIntFieldUpdateOperationsInput | number | null
+    cartao_id?: NullableIntFieldUpdateOperationsInput | number | null
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
   }
 
   export type tipo_pagamentoUncheckedUpdateManyWithoutBoletoInput = {
     tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     pagamento_id?: IntFieldUpdateOperationsInput | number
-    deposito_id?: IntFieldUpdateOperationsInput | number
-    cartao_id?: IntFieldUpdateOperationsInput | number
+    deposito_id?: NullableIntFieldUpdateOperationsInput | number | null
+    cartao_id?: NullableIntFieldUpdateOperationsInput | number | null
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
   }
 
   export type tipo_pagamentoCreateManyDepositoInput = {
     tipo_pagamento_id?: number
     pagamento_id: number
-    boleto_id: number
-    cartao_id: number
+    boleto_id?: number | null
+    cartao_id?: number | null
     tipo_pagamento_status: number
   }
 
   export type tipo_pagamentoUpdateWithoutDepositoInput = {
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
-    boleto?: boletoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
-    cartao?: cartaoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    boleto?: boletoUpdateOneWithoutTipo_pagamentoNestedInput
+    cartao?: cartaoUpdateOneWithoutTipo_pagamentoNestedInput
     pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
   }
 
   export type tipo_pagamentoUncheckedUpdateWithoutDepositoInput = {
     tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     pagamento_id?: IntFieldUpdateOperationsInput | number
-    boleto_id?: IntFieldUpdateOperationsInput | number
-    cartao_id?: IntFieldUpdateOperationsInput | number
+    boleto_id?: NullableIntFieldUpdateOperationsInput | number | null
+    cartao_id?: NullableIntFieldUpdateOperationsInput | number | null
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
   }
 
   export type tipo_pagamentoUncheckedUpdateManyWithoutDepositoInput = {
     tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     pagamento_id?: IntFieldUpdateOperationsInput | number
-    boleto_id?: IntFieldUpdateOperationsInput | number
-    cartao_id?: IntFieldUpdateOperationsInput | number
+    boleto_id?: NullableIntFieldUpdateOperationsInput | number | null
+    cartao_id?: NullableIntFieldUpdateOperationsInput | number | null
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
   }
 
   export type tipo_pagamentoCreateManyCartaoInput = {
     tipo_pagamento_id?: number
     pagamento_id: number
-    boleto_id: number
-    deposito_id: number
+    boleto_id?: number | null
+    deposito_id?: number | null
     tipo_pagamento_status: number
   }
 
   export type tipo_pagamentoUpdateWithoutCartaoInput = {
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
-    boleto?: boletoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
-    deposito?: depositoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
+    boleto?: boletoUpdateOneWithoutTipo_pagamentoNestedInput
+    deposito?: depositoUpdateOneWithoutTipo_pagamentoNestedInput
     pagamento?: pagamentoUpdateOneRequiredWithoutTipo_pagamentoNestedInput
   }
 
   export type tipo_pagamentoUncheckedUpdateWithoutCartaoInput = {
     tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     pagamento_id?: IntFieldUpdateOperationsInput | number
-    boleto_id?: IntFieldUpdateOperationsInput | number
-    deposito_id?: IntFieldUpdateOperationsInput | number
+    boleto_id?: NullableIntFieldUpdateOperationsInput | number | null
+    deposito_id?: NullableIntFieldUpdateOperationsInput | number | null
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
   }
 
   export type tipo_pagamentoUncheckedUpdateManyWithoutCartaoInput = {
     tipo_pagamento_id?: IntFieldUpdateOperationsInput | number
     pagamento_id?: IntFieldUpdateOperationsInput | number
-    boleto_id?: IntFieldUpdateOperationsInput | number
-    deposito_id?: IntFieldUpdateOperationsInput | number
+    boleto_id?: NullableIntFieldUpdateOperationsInput | number | null
+    deposito_id?: NullableIntFieldUpdateOperationsInput | number | null
     tipo_pagamento_status?: IntFieldUpdateOperationsInput | number
   }
 

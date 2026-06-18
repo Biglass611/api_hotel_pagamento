@@ -50,13 +50,13 @@ model cartao {
 model tipo_pagamento {
   tipo_pagamento_id     Int       @id @default(autoincrement())
   pagamento_id          Int
-  boleto_id             Int
-  deposito_id           Int
-  cartao_id             Int
+  boleto_id             Int?
+  deposito_id           Int?
+  cartao_id             Int?
   tipo_pagamento_status Int
-  boleto                boleto    @relation(fields: [boleto_id], references: [boleto_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_pagamento_boleto1")
-  cartao                cartao    @relation(fields: [cartao_id], references: [cartao_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_pagamento_cartao1")
-  deposito              deposito  @relation(fields: [deposito_id], references: [deposito_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_pagamento_deposito1")
+  boleto                boleto?   @relation(fields: [boleto_id], references: [boleto_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_pagamento_boleto1")
+  cartao                cartao?   @relation(fields: [cartao_id], references: [cartao_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_pagamento_cartao1")
+  deposito              deposito? @relation(fields: [deposito_id], references: [deposito_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_pagamento_deposito1")
   pagamento             pagamento @relation(fields: [pagamento_id], references: [pagamento_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_pagamento_pagamentos")
 
   @@index([pagamento_id], map: "fk_tipo_pagamento_pagamentos_idx")
