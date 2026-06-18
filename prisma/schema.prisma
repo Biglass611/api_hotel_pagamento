@@ -50,6 +50,7 @@ model cartao {
 model tipo_pagamento {
   tipo_pagamento_id     Int        @id @default(autoincrement())
   pagamento_id          Int
+  reserva_id            Int
   boleto_id             Int?
   deposito_id           Int?
   cartao_id             Int?

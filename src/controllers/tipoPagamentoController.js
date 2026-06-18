@@ -41,14 +41,15 @@ async function getById(req, res) {
 
 async function create(req, res) {
   try {
-    const { pagamento_id, boleto_id, deposito_id, cartao_id, tipo_pagamento_status } = req.body;
+    const { pagamento_id, reserva_id, boleto_id, deposito_id, cartao_id, tipo_pagamento_status } = req.body;
 
-    if (!pagamento_id || (!boleto_id && !deposito_id && !cartao_id) || tipo_pagamento_status === undefined) {
-      return res.status(400).json({ error: 'Campos obrigatórios: pagamento_id, tipo_pagamento_status e ao menos um de boleto_id, deposito_id ou cartao_id.' });
+    if (!pagamento_id || !reserva_id || (!boleto_id && !deposito_id && !cartao_id) || tipo_pagamento_status === undefined) {
+      return res.status(400).json({ error: 'Campos obrigatórios: pagamento_id, reserva_id, tipo_pagamento_status e ao menos um de boleto_id, deposito_id ou cartao_id.' });
     }
 
     const data = {
       pagamento_id: parseInt(pagamento_id),
+      reserva_id: parseInt(reserva_id),
       tipo_pagamento_status: parseInt(tipo_pagamento_status),
     };
     
@@ -69,7 +70,7 @@ async function create(req, res) {
 async function update(req, res) {
   try {
     const { id } = req.params;
-    const { pagamento_id, boleto_id, deposito_id, cartao_id, tipo_pagamento_status } = req.body;
+    const { pagamento_id, reserva_id, boleto_id, deposito_id, cartao_id, tipo_pagamento_status } = req.body;
 
     const exists = await prisma.tipo_pagamento.findUnique({ where: { tipo_pagamento_id: parseInt(id) } });
     if (!exists) return res.status(404).json({ error: 'Tipo de pagamento não encontrado.' });
@@ -78,6 +79,7 @@ async function update(req, res) {
       where: { tipo_pagamento_id: parseInt(id) },
       data: {
         pagamento_id: pagamento_id !== undefined ? parseInt(pagamento_id) : exists.pagamento_id,
+        reserva_id: reserva_id !== undefined ? parseInt(reserva_id) : exists.reserva_id,
         tipo_pagamento_status: tipo_pagamento_status !== undefined ? parseInt(tipo_pagamento_status) : exists.tipo_pagamento_status,
         boleto_id: boleto_id ? parseInt(boleto_id) : null,
         deposito_id: deposito_id ? parseInt(deposito_id) : null,
@@ -105,6 +107,7 @@ async function patch(req, res) {
     if (fields.boleto_id !== undefined) data.boleto_id = fields.boleto_id ? parseInt(fields.boleto_id) : null;
     if (fields.deposito_id !== undefined) data.deposito_id = fields.deposito_id ? parseInt(fields.deposito_id) : null;
     if (fields.cartao_id !== undefined) data.cartao_id = fields.cartao_id ? parseInt(fields.cartao_id) : null;
+    if (fields.reserva_id !== undefined) data.reserva_id = parseInt(fields.reserva_id);
     if (fields.tipo_pagamento_status !== undefined) data.tipo_pagamento_status = parseInt(fields.tipo_pagamento_status);
 
     const tipo = await prisma.tipo_pagamento.update({
