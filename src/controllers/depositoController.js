@@ -28,15 +28,14 @@ async function getById(req, res) {
 
 async function create(req, res) {
   try {
-    const { deposito_id, deposito_banco, deposito_valor, deposito_agencia, deposito_conta, deposito_status } = req.body;
+    const { deposito_banco, deposito_valor, deposito_agencia, deposito_conta, deposito_status } = req.body;
 
-    if (!deposito_id || !deposito_banco || deposito_valor === undefined || !deposito_agencia || !deposito_conta || deposito_status === undefined) {
-      return res.status(400).json({ error: 'Campos obrigatórios: deposito_id, deposito_banco, deposito_valor, deposito_agencia, deposito_conta, deposito_status.' });
+    if (!deposito_banco || deposito_valor === undefined || !deposito_agencia || !deposito_conta || deposito_status === undefined) {
+      return res.status(400).json({ error: 'Campos obrigatórios: deposito_banco, deposito_valor, deposito_agencia, deposito_conta, deposito_status.' });
     }
 
     const deposito = await prisma.deposito.create({
       data: {
-        deposito_id: parseInt(deposito_id),
         deposito_banco,
         deposito_valor: parseFloat(deposito_valor),
         deposito_agencia,

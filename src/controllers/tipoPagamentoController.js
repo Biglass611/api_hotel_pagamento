@@ -41,22 +41,21 @@ async function getById(req, res) {
 
 async function create(req, res) {
   try {
-    const { tipo_pagamento_id, pagamento_id, boleto_id, deposito_id, cartao_id, tipo_pagamento_status } = req.body;
+    const { pagamento_id, boleto_id, deposito_id, cartao_id, tipo_pagamento_status } = req.body;
 
-    if (!tipo_pagamento_id || !pagamento_id || !boleto_id || !deposito_id || !cartao_id || tipo_pagamento_status === undefined) {
-      return res.status(400).json({ error: 'Campos obrigatórios: tipo_pagamento_id, pagamento_id, boleto_id, deposito_id, cartao_id, tipo_pagamento_status.' });
+    if (!pagamento_id || (!boleto_id && !deposito_id && !cartao_id) || tipo_pagamento_status === undefined) {
+      return res.status(400).json({ error: 'Campos obrigatórios: pagamento_id, tipo_pagamento_status e ao menos um de boleto_id, deposito_id ou cartao_id.' });
     }
 
-    const tipo = await prisma.tipo_pagamento.create({
-      data: {
-        tipo_pagamento_id: parseInt(tipo_pagamento_id),
-        pagamento_id: parseInt(pagamento_id),
-        boleto_id: parseInt(boleto_id),
-        deposito_id: parseInt(deposito_id),
-        cartao_id: parseInt(cartao_id),
-        tipo_pagamento_status: parseInt(tipo_pagamento_status),
-      },
-    });
+    const data = {
+      pagamento_id: parseInt(pagamento_id),
+      tipo_pagamento_status: parseInt(tipo_pagamento_status),
+    };
+    if (boleto_id)   data.boleto_id   = parseInt(boleto_id);
+    if (deposito_id) data.deposito_id = parseInt(deposito_id);
+    if (cartao_id)   data.cartao_id   = parseInt(cartao_id);
+
+    const tipo = await prisma.tipo_pagamento.create({ data });
 
     return res.status(201).json(tipo);
   } catch (error) {

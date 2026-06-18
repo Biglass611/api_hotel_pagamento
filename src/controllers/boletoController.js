@@ -28,15 +28,14 @@ async function getById(req, res) {
 
 async function create(req, res) {
   try {
-    const { boleto_id, boleto_numero, boleto_vencimento, boleto_emissao, boleto_status } = req.body;
+    const { boleto_numero, boleto_vencimento, boleto_emissao, boleto_status } = req.body;
 
-    if (!boleto_id || !boleto_numero || !boleto_vencimento || !boleto_emissao || boleto_status === undefined) {
-      return res.status(400).json({ error: 'Campos obrigatórios: boleto_id, boleto_numero, boleto_vencimento, boleto_emissao, boleto_status.' });
+    if (!boleto_numero || !boleto_vencimento || !boleto_emissao || boleto_status === undefined) {
+      return res.status(400).json({ error: 'Campos obrigatórios: boleto_numero, boleto_vencimento, boleto_emissao, boleto_status.' });
     }
 
     const boleto = await prisma.boleto.create({
       data: {
-        boleto_id: parseInt(boleto_id),
         boleto_numero,
         boleto_vencimento: new Date(boleto_vencimento),
         boleto_emissao: new Date(boleto_emissao),
