@@ -22,6 +22,34 @@ const auth = require('../middlewares/auth');
  *       200:
  *         description: Lista de pagamentos
  */
+/**
+ * @swagger
+ * /pagamentos/processar:
+ *   post:
+ *     summary: Processa um pagamento de forma assíncrona (gateway simulado)
+ *     tags: [Pagamentos]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [reserva_id, metodo]
+ *             properties:
+ *               pagamento_id: { type: integer }
+ *               reserva_id: { type: integer }
+ *               metodo: { type: string, example: "cartao" }
+ *               dados:
+ *                 type: object
+ *                 description: "Dados para validação (cartão: numero, cvv, validade)"
+ *     responses:
+ *       202:
+ *         description: Pagamento em processamento
+ *       400:
+ *         description: Dados inválidos
+ */
+router.post('/processar', auth, ctrl.processar);
+
 router.get('/', auth, ctrl.getAll);
 
 /**
