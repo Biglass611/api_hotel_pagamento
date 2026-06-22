@@ -1,13 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 function authMiddleware(req, res, next) {
-  // =========================================================
-  // ⚠️ JWT DESATIVADO TEMPORARIAMENTE PARA TESTES NO POSTMAN
-  // =========================================================
-  console.warn('[Aviso] Autenticação JWT está desligada. Passagem liberada!');
-  return next(); 
-
-  /* === CÓDIGO ORIGINAL (DESCOMENTE ISSO NA HORA DE ENTREGAR O PROJETO) ===
   const authHeader = req.headers['authorization'];
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -18,12 +11,11 @@ function authMiddleware(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+    req.user = decoded; // { id, login, role }
     next();
   } catch (error) {
-    return res.status(403).json({ error: 'Token inválido ou expirado.' });
+    return res.status(401).json({ error: 'Token inválido ou expirado.' });
   }
-  */
 }
 
 module.exports = authMiddleware;
