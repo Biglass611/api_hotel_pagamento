@@ -33,12 +33,12 @@ async function publishResultadoPagamento(aprovado, reservaId, extra = {}) {
     }
 
     const fila = 'pagamento_queue';
-    await channel.assertQueue(fila, { durable: true });
+    await channel.assertQueue(fila, { durable: false });
 
     const evento = aprovado ? 'PAGAMENTO_APROVADO' : 'PAGAMENTO_RECUSADO';
     const payload = { evento, reserva_id: parseInt(reservaId), ...extra };
 
-    channel.sendToQueue(fila, Buffer.from(JSON.stringify(payload)), { persistent: true });
+    channel.sendToQueue(fila, Buffer.from(JSON.stringify(payload)));
     console.log(`[Producer] -> ${fila}: ${evento} (reserva ${reservaId})`);
   } catch (error) {
     console.error('[Producer] Erro ao publicar resultado de pagamento:', error.message);

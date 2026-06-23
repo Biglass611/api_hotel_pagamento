@@ -1,5 +1,4 @@
 const prisma = require('../config/prismaClient');
-const { getChannel } = require('../config/rabbitmq');
 
 async function getAll(req, res) {
   try {
@@ -60,38 +59,6 @@ async function create(req, res) {
     if (cartao_id)   data.cartao_id   = parseInt(cartao_id);
 
     const tipo = await prisma.tipo_pagamento.create({ data });
-
-    // Timer de simulação: boleto confirmado automaticamente após 12 segundos
-    if (boleto_id && reserva_id) {
-      const tipoPagamentoId = tipo.tipo_pagamento_id;
-      const reservaIdInt = parseInt(reserva_id);
-      const boletoIdInt = parseInt(boleto_id);
-
-      setTimeout(async () => {
-        try {
-          await prisma.boleto.update({
-            where: { boleto_id: boletoIdInt },
-            data: { boleto_status: 1 },
-          });
-
-          await prisma.tipo_pagamento.update({
-            where: { tipo_pagamento_id: tipoPagamentoId },
-            data: { tipo_pagamento_status: 1 },
-          });
-
-          const channel = getChannel();
-          await channel.assertQueue('pagamento_queue', { durable: false });
-          channel.sendToQueue(
-            'pagamento_queue',
-            Buffer.from(JSON.stringify({ evento: 'PAGAMENTO_APROVADO', reserva_id: reservaIdInt }))
-          );
-
-          console.log(`[Boleto] ✅ Pagamento simulado confirmado para reserva ${reservaIdInt}`);
-        } catch (err) {
-          console.error('[Boleto] Erro ao confirmar pagamento simulado:', err.message);
-        }
-      }, 12000);
-    }
 
     return res.status(201).json(tipo);
   } catch (error) {
