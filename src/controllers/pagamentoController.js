@@ -81,6 +81,9 @@ async function processar(req, res) {
 }
 
 async function getAll(req, res) {
+  if (req.user.role !== 'Admin') {
+    return res.status(403).json({ error: 'Acesso negado.' });
+  }
   try {
     const pagamentos = await prisma.pagamento.findMany();
     return res.status(200).json(pagamentos);
@@ -91,6 +94,9 @@ async function getAll(req, res) {
 }
 
 async function getById(req, res) {
+  if (req.user.role !== 'Admin') {
+    return res.status(403).json({ error: 'Acesso negado.' });
+  }
   try {
     const { id } = req.params;
     const pagamento = await prisma.pagamento.findUnique({
